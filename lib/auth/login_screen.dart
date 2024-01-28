@@ -1,6 +1,10 @@
 // packages
 import 'package:flutter/material.dart';
 
+// firebase
+import 'package:firebase_auth/firebase_auth.dart';
+import '../auth/auth.dart';
+
 // pages
 import '../main.dart';
 
@@ -12,8 +16,28 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
+  // text editing controllers
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  // error message
+  String? errorMessage = '';
+
+  bool isLogin = true;
+
+  final User? user = auth().currentUser;
+
+  Future<void> singInWithEmailAndPassword() async {
+    try {
+      await auth().signInWithEmailAndPassword(
+          email: emailController.text.toLowerCase(),
+          password: passwordController.text);
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        errorMessage = e.message;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +84,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(
                             color: secondaryColour2,
                           ),
-                          controller: email,
+                          controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           cursorColor: secondaryColour2,
                           decoration: InputDecoration(
@@ -92,7 +116,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(
                             color: secondaryColour2,
                           ),
-                          controller: password,
+                          controller: passwordController,
                           obscureText: true,
                           cursorColor: const Color(0xff03767b),
                           decoration: InputDecoration(
@@ -117,6 +141,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          errorMessage == '' ? '' : '$errorMessage',
+                          style: TextStyle(
+                            color: secondaryColour3,
+                          ),
+                        ),
+                      ),
                       TextButton(
                         onPressed: () {},
                         child: Text(
@@ -127,7 +160,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       MaterialButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          singInWithEmailAndPassword();
+                        },
                         color: secondaryColour2,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
