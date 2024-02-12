@@ -8,7 +8,7 @@ import 'auth/login_screen.dart';
 import 'firebase_options.dart';
 
 // auth
-import 'auth/auth.dart';
+import 'services/auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: StreamBuilder(
-        stream: auth().authStateChanges,
+        stream: Auth().authStateChanges,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return const Home();

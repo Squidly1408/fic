@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 // firebase
 import 'package:firebase_auth/firebase_auth.dart';
-import '../auth/auth.dart';
+import '../services/auth.dart';
 
 // pages
 import '../main.dart';
@@ -25,11 +25,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool isLogin = true;
 
-  final User? user = auth().currentUser;
+  final User? user = Auth().currentUser;
 
   Future<void> singInWithEmailAndPassword() async {
     try {
-      await auth().signInWithEmailAndPassword(
+      await Auth().signInWithEmailAndPassword(
           email: emailController.text.toLowerCase(),
           password: passwordController.text);
     } on FirebaseAuthException catch (e) {
