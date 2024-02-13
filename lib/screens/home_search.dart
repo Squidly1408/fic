@@ -1,3 +1,6 @@
+import 'package:fic/Home.dart';
+import 'package:fic/main.dart';
+import 'package:fic/screens/result.dart';
 import 'package:flutter/material.dart';
 
 class HomeSearch extends StatefulWidget {
@@ -8,35 +11,51 @@ class HomeSearch extends StatefulWidget {
 }
 
 class _HomeSearchState extends State<HomeSearch> {
+  TextEditingController search = TextEditingController();
+
+  Search() {
+    print(search.text);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'title',
-              style: TextStyle(fontSize: 20),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.25,
+              child: Image.asset(
+                'assets/images/fic_logo.png',
+                fit: BoxFit.fitWidth,
+              ),
             ),
-            Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae ligula blandit, auctor eros eu, tempor quam. Pellentesque suscipit velit ante, non tincidunt dui volutpat ac. Praesent porta sodales eleifend. Donec ac sem at enim fermentum ullamcorper. Curabitur ante felis, ultricies in risus id, rutrum mattis quam. Etiam lacinia sem ipsum, et gravida ex malesuada at. Suspendisse tristique lacus non tempor gravida. Duis euismod eros ut mauris congue ultrices ut non ipsum. Ut congue dolor non leo fringilla, nec condimentum mauris bibendum.'),
-            Divider(
-              thickness: 3,
+            SearchBar(
+              backgroundColor: MaterialStatePropertyAll(secondaryColour1),
+              surfaceTintColor: MaterialStatePropertyAll(secondaryColour1),
+              hintText: 'Search...',
+              onSubmitted: (value) {
+                Search();
+              },
+              side: MaterialStatePropertyAll(
+                BorderSide(color: secondaryColour2),
+              ),
+              controller: search,
+              leading: IconButton(
+                icon: Icon(Icons.search, color: mainColour),
+                onPressed: () {
+                  Search();
+                },
+              ),
             ),
-            Text(
-              'title',
-              style: TextStyle(fontSize: 20),
-            ),
-            Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae ligula blandit, auctor eros eu, tempor quam. Pellentesque suscipit velit ante, non tincidunt dui volutpat ac. Praesent porta sodales eleifend. Donec ac sem at enim fermentum ullamcorper. Curabitur ante felis, ultricies in risus id, rutrum mattis quam. Etiam lacinia sem ipsum, et gravida ex malesuada at. Suspendisse tristique lacus non tempor gravida. Duis euismod eros ut mauris congue ultrices ut non ipsum. Ut congue dolor non leo fringilla, nec condimentum mauris bibendum.'),
-            Divider(thickness: 3),
-            Text(
-              'title',
-              style: TextStyle(fontSize: 20),
-            ),
-            Text(
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vitae ligula blandit, auctor eros eu, tempor quam. Pellentesque suscipit velit ante, non tincidunt dui volutpat ac. Praesent porta sodales eleifend. Donec ac sem at enim fermentum ullamcorper. Curabitur ante felis, ultricies in risus id, rutrum mattis quam. Etiam lacinia sem ipsum, et gravida ex malesuada at. Suspendisse tristique lacus non tempor gravida. Duis euismod eros ut mauris congue ultrices ut non ipsum. Ut congue dolor non leo fringilla, nec condimentum mauris bibendum.'),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                'This is a student created project, aimed at increasing collaboration between students. Please use this tool with respect to yourself and others, thankyou!',
+                style: TextStyle(color: secondaryColour3),
+              ),
+            )
           ],
         ),
       ),

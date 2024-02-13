@@ -1,7 +1,8 @@
 import 'package:fic/main.dart';
 import 'package:fic/screens/home_search.dart';
-import 'package:fic/widgets/drawer.dart';
-import 'package:fic/widgets/post.dart';
+import 'package:fic/screens/other_profile.dart';
+import 'package:fic/screens/result.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class Home extends StatefulWidget {
 
 ValueNotifier<bool> notifier1 = ValueNotifier(false);
 
-Widget setting = const HomeSearch();
+Widget screen = const Result();
 
 class _HomeState extends State<Home> {
   @override
@@ -27,7 +28,9 @@ class _HomeState extends State<Home> {
         child: Row(
           children: [
             Container(
-              color: secondaryColour2,
+              decoration: BoxDecoration(
+                color: secondaryColour2,
+              ),
               width: MediaQuery.of(context).size.width * 0.25,
               child: ListView(
                 children: [
@@ -46,27 +49,31 @@ class _HomeState extends State<Home> {
                             ? Axis.vertical
                             : Axis.horizontal,
                         children: [
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: CircleAvatar(
-                              backgroundColor: Colors.white,
-                              maxRadius: 30,
-                              backgroundImage: NetworkImage(
-                                  'https://www.shutterstock.com/image-vector/fly-wings-batman-famous-logo-600nw-2054680235.jpg'),
+                              backgroundColor: mainColour,
+                              maxRadius: 32,
+                              child: const CircleAvatar(
+                                backgroundColor: Colors.white,
+                                maxRadius: 30,
+                                backgroundImage: NetworkImage(
+                                    'https://www.shutterstock.com/image-vector/fly-wings-batman-famous-logo-600nw-2054680235.jpg'),
+                              ),
                             ),
                           ),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '___Username___',
+                                '______Name______',
                                 style: TextStyle(
                                   color: secondaryColour1,
                                   fontSize: 16,
                                 ),
                               ),
                               Text(
-                                '______Email______@education.nsw.gov.au',
+                                '_________Email_________@education.nsw.gov.au',
                                 style: TextStyle(
                                   color: secondaryColour1,
                                   fontSize: 10,
@@ -78,7 +85,7 @@ class _HomeState extends State<Home> {
                       ),
                       IconButton(
                         onPressed: () {},
-                        icon: Icon(Icons.edit_square, color: secondaryColour1),
+                        icon: Icon(Icons.edit_square, color: mainColour),
                       ),
                     ],
                   ),
@@ -99,16 +106,7 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Divider(
-                      color: secondaryColour1,
-                    ),
-                  ),
-                  Center(
-                    child: Text(
-                      'Projects',
-                      style: TextStyle(
-                        color: secondaryColour1,
-                        fontSize: 13,
-                      ),
+                      color: mainColour,
                     ),
                   ),
                   ListView.builder(
@@ -130,17 +128,35 @@ class _HomeState extends State<Home> {
                                 Text(
                                     '____________________________________________________________________________________________project____________________________________________________________________________________________'),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.edit,
-                                          color: secondaryColour2),
+                                    const Column(
+                                      children: [
+                                        Icon(CupertinoIcons.heart_fill),
+                                        Text(
+                                          '12',
+                                          style: TextStyle(
+                                            fontSize: 8,
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.delete,
-                                          color: secondaryColour2),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: Icon(Icons.edit,
+                                              color: secondaryColour2),
+                                        ),
+                                        IconButton(
+                                          onPressed: () {},
+                                          icon: Icon(Icons.delete,
+                                              color: secondaryColour2),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 )
@@ -186,99 +202,28 @@ class _HomeState extends State<Home> {
                         child: Text(
                           'Add project',
                           style: TextStyle(
-                            color: secondaryColour2,
+                            color: secondaryColour1,
                             fontSize: 13,
                           ),
                         ),
                       ),
-                      color: secondaryColour1,
+                      color: mainColour,
                     ),
                   )
                 ],
               ),
             ),
-            const VerticalDivider(thickness: 3),
             Expanded(
               child: ValueListenableBuilder(
                 valueListenable: notifier1,
                 builder: (context, value, child) {
-                  return setting;
+                  return screen;
                 },
               ),
             ),
           ],
         ),
       ),
-    );
-  }
-}
-
-class _CustomListTile extends StatefulWidget {
-  final String title;
-  final IconData icon;
-  final Widget? trailing;
-  final Widget setting;
-  const _CustomListTile(
-      {Key? key,
-      required this.title,
-      required this.icon,
-      this.trailing,
-      required this.setting})
-      : super(key: key);
-
-  @override
-  State<_CustomListTile> createState() => _CustomListTileState();
-}
-
-class _CustomListTileState extends State<_CustomListTile> {
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(widget.title),
-      leading: Icon(widget.icon),
-      trailing: widget.trailing ?? const Icon(CupertinoIcons.forward, size: 18),
-      onTap: () {
-        setState(() {
-          setting = widget.setting;
-        });
-        notifier1.value = !notifier1.value;
-      },
-    );
-  }
-}
-
-class _SingleSection extends StatelessWidget {
-  final String title;
-  final List<Widget> children;
-  const _SingleSection({
-    Key? key,
-    required this.title,
-    required this.children,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 16),
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            title.toUpperCase(),
-            style:
-                Theme.of(context).textTheme.headline3?.copyWith(fontSize: 16),
-          ),
-        ),
-        Container(
-          width: double.infinity,
-          color: Colors.white,
-          child: Column(
-            children: children,
-          ),
-        ),
-      ],
     );
   }
 }
