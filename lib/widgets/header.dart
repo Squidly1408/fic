@@ -40,7 +40,7 @@ class Header extends StatelessWidget {
                         color: secondaryColour1,
                       ),
                     ),
-                    icon: Icon(Icons.search),
+                    icon: const Icon(Icons.search),
                     iconColor: secondaryColour1,
                     hintText: 'Search...',
                     hintStyle: TextStyle(

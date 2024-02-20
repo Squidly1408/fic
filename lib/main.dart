@@ -1,5 +1,5 @@
 // packages
-import 'package:fic/Home.dart';
+import 'package:fic/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-import 'package:fic/Home.dart';
+import 'package:fic/home.dart';
 import 'package:fic/main.dart';
 import 'package:fic/screens/result.dart';
 import 'package:flutter/material.dart';
@@ -11,10 +11,14 @@ class HomeSearch extends StatefulWidget {
 }
 
 class _HomeSearchState extends State<HomeSearch> {
-  TextEditingController search = TextEditingController();
-
-  Search() {
-    print(search.text);
+  TextEditingController searchText = TextEditingController();
+  search(search) {
+    setState(() {
+      screen = Result(
+        search: search,
+      );
+      notifier1.value = !notifier1.value;
+    });
   }
 
   @override
@@ -36,16 +40,16 @@ class _HomeSearchState extends State<HomeSearch> {
               surfaceTintColor: MaterialStatePropertyAll(secondaryColour1),
               hintText: 'Search...',
               onSubmitted: (value) {
-                Search();
+                search(value);
               },
               side: MaterialStatePropertyAll(
                 BorderSide(color: secondaryColour2),
               ),
-              controller: search,
+              controller: searchText,
               leading: IconButton(
                 icon: Icon(Icons.search, color: mainColour),
                 onPressed: () {
-                  Search();
+                  search(searchText);
                 },
               ),
             ),
