@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import '../home.dart';
 import '../main.dart';
+import 'edit_screen.dart';
 
 class Result extends StatefulWidget {
   const Result({super.key, required this.search});
@@ -163,7 +164,16 @@ class _ResultState extends State<Result> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 IconButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    setState(
+                                      () {
+                                        screen = EditScreen(
+                                          postId: snapshot.data!.docs[index]
+                                              .get('pid'),
+                                        );
+                                      },
+                                    );
+                                  },
                                   icon: Icon(
                                     Icons.edit,
                                     color: secondaryColour3,

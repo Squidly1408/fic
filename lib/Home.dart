@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fic/main.dart';
+import 'package:fic/screens/edit_screen.dart';
 
 import 'package:fic/screens/home_search.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -16,7 +16,7 @@ class Home extends StatefulWidget {
 
 ValueNotifier<bool> notifier1 = ValueNotifier(false);
 
-Widget screen = const HomeSearch();
+Widget screen = HomeSearch();
 
 class _HomeState extends State<Home> {
   CollectionReference users = FirebaseFirestore.instance.collection('Users');
@@ -169,7 +169,18 @@ class _HomeState extends State<Home> {
                                                       MainAxisAlignment.center,
                                                   children: [
                                                     IconButton(
-                                                      onPressed: () {},
+                                                      onPressed: () {
+                                                        setState(
+                                                          () {
+                                                            screen = EditScreen(
+                                                              postId: snapshot
+                                                                  .data!
+                                                                  .docs[index]
+                                                                  .get('pid'),
+                                                            );
+                                                          },
+                                                        );
+                                                      },
                                                       icon: Icon(Icons.edit,
                                                           color:
                                                               secondaryColour2),
