@@ -3,6 +3,7 @@ import 'package:fic/main.dart';
 import 'package:fic/screens/edit_screen.dart';
 
 import 'package:fic/screens/home_search.dart';
+import 'package:fic/screens/new_post.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
@@ -176,7 +177,7 @@ class _HomeState extends State<Home> {
                                                               postId: snapshot
                                                                   .data!
                                                                   .docs[index]
-                                                                  .get('pid'),
+                                                                  .id,
                                                             );
                                                           },
                                                         );
@@ -250,7 +251,12 @@ class _HomeState extends State<Home> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: MaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                screen = const NewPost();
+                              });
+                              notifier1.value = !notifier1.value;
+                            },
                             color: mainColour,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
