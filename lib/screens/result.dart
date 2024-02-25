@@ -28,7 +28,7 @@ class _ResultState extends State<Result> {
       screen = Result(
         search: search,
       );
-      notifier1.value = !notifier1.value;
+      screenNotifier.value = !screenNotifier.value;
     });
   }
 
@@ -39,7 +39,7 @@ class _ResultState extends State<Result> {
       );
     });
 
-    notifier1.value = !notifier1.value;
+    screenNotifier.value = !screenNotifier.value;
   }
 
   like(index) {}
@@ -106,48 +106,61 @@ class _ResultState extends State<Result> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Flex(
-                                  direction:
-                                      MediaQuery.of(context).size.width < 1000
-                                          ? Axis.vertical
-                                          : Axis.horizontal,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: CircleAvatar(
-                                        backgroundColor: mainColour,
-                                        maxRadius: 22,
-                                        child: const CircleAvatar(
-                                          backgroundColor: Colors.white,
-                                          maxRadius: 20,
-                                          backgroundImage: NetworkImage(
-                                              'https://www.shutterstock.com/image-vector/fly-wings-batman-famous-logo-600nw-2054680235.jpg'),
-                                        ),
-                                      ),
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                FutureBuilder(
+                                  future: users
+                                      .doc(
+                                        snapshot.data!.docs[index]
+                                            .get('uid')
+                                            .toString(),
+                                      )
+                                      .get(),
+                                  builder: (context, snapshot) {
+                                    Map<String, dynamic> data = snapshot.data!
+                                        .data() as Map<String, dynamic>;
+                                    return Flex(
+                                      direction:
+                                          MediaQuery.of(context).size.width <
+                                                  1000
+                                              ? Axis.vertical
+                                              : Axis.horizontal,
                                       children: [
-                                        Text(
-                                          snapshot.data!.docs[index]
-                                              .get('Username'),
-                                          style: TextStyle(
-                                            color: secondaryColour2,
-                                            fontSize: 16,
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: CircleAvatar(
+                                            backgroundColor: mainColour,
+                                            maxRadius: 22,
+                                            child: CircleAvatar(
+                                              backgroundColor: Colors.white,
+                                              maxRadius: 20,
+                                              backgroundImage: NetworkImage(
+                                                  data['ProfilePic']
+                                                      .toString()),
+                                            ),
                                           ),
                                         ),
-                                        Text(
-                                          snapshot.data!.docs[index]
-                                              .get('Email'),
-                                          style: TextStyle(
-                                            color: secondaryColour2,
-                                            fontSize: 10,
-                                          ),
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              data['Username'].toString(),
+                                              style: TextStyle(
+                                                color: secondaryColour2,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                            Text(
+                                              data['Email'].toString(),
+                                              style: TextStyle(
+                                                color: secondaryColour2,
+                                                fontSize: 10,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
-                                    ),
-                                  ],
+                                    );
+                                  },
                                 ),
                               ],
                             ),

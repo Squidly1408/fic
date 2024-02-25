@@ -25,7 +25,7 @@ class _NewPostState extends State<NewPost> {
       screen = Result(
         search: search,
       );
-      notifier1.value = !notifier1.value;
+      screenNotifier.value = !screenNotifier.value;
     });
   }
 
@@ -36,7 +36,7 @@ class _NewPostState extends State<NewPost> {
       );
     });
 
-    notifier1.value = !notifier1.value;
+    screenNotifier.value = !screenNotifier.value;
   }
 
   like(index) {}
@@ -262,7 +262,7 @@ class _NewPostState extends State<NewPost> {
                             setState(() {
                               screen = HomeSearch();
                             });
-                            notifier1.value = !notifier1.value;
+                            screenNotifier.value = !screenNotifier.value;
                           },
                           color: secondaryColour2,
                           shape: RoundedRectangleBorder(

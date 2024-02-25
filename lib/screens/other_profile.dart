@@ -24,7 +24,7 @@ class _OtherProfileState extends State<OtherProfile> {
       screen = Result(
         search: search,
       );
-      notifier1.value = !notifier1.value;
+      screenNotifier.value = !screenNotifier.value;
     });
   }
 

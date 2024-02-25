@@ -17,7 +17,7 @@ class _HomeSearchState extends State<HomeSearch> {
       screen = Result(
         search: search,
       );
-      notifier1.value = !notifier1.value;
+      screenNotifier.value = !screenNotifier.value;
     });
   }
 
