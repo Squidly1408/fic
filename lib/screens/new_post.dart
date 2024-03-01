@@ -55,23 +55,33 @@ class _NewPostState extends State<NewPost> {
           centerTitle: true,
           title: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: SearchBar(
-              backgroundColor: MaterialStatePropertyAll(secondaryColour1),
-              surfaceTintColor: MaterialStatePropertyAll(secondaryColour1),
-              hintText: 'Search...',
-              onSubmitted: (value) {
-                search(value);
-              },
-              side: MaterialStatePropertyAll(
-                BorderSide(color: secondaryColour2),
-              ),
-              controller: searchText,
-              leading: IconButton(
-                icon: Icon(Icons.search, color: mainColour),
-                onPressed: () {
-                  search(searchText);
-                },
-              ),
+            child: Row(
+              children: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.menu, color: mainColour),
+                ),
+                SearchBar(
+                  constraints: BoxConstraints(
+                      maxWidth: MediaQuery.of(context).size.width * 0.5),
+                  backgroundColor: MaterialStatePropertyAll(secondaryColour1),
+                  surfaceTintColor: MaterialStatePropertyAll(secondaryColour1),
+                  hintText: 'Search...',
+                  onSubmitted: (value) {
+                    search(value);
+                  },
+                  side: MaterialStatePropertyAll(
+                    BorderSide(color: secondaryColour2),
+                  ),
+                  controller: searchText,
+                  leading: IconButton(
+                    icon: Icon(Icons.search, color: mainColour),
+                    onPressed: () {
+                      search(searchText);
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
         ),

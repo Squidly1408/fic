@@ -141,12 +141,15 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          errorMessage == '' ? '' : '$errorMessage',
-                          style: TextStyle(
-                            color: secondaryColour3,
+                      Visibility(
+                        visible: errorMessage != '' || errorMessage != null,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            errorMessage == '' ? '' : '$errorMessage',
+                            style: TextStyle(
+                              color: secondaryColour3,
+                            ),
                           ),
                         ),
                       ),
