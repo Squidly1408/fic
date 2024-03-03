@@ -59,6 +59,7 @@ class _HomeState extends State<Home> {
                             decoration: BoxDecoration(
                               color: secondaryColour2,
                             ),
+                            // TODO: Make this variebale change with size of screen
                             width: MediaQuery.of(context).size.width * 0.25,
                             child: ListView(
                               children: [
@@ -263,7 +264,7 @@ class _HomeState extends State<Home> {
                                     color: mainColour,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0, vertical: 16.0),
+                                          horizontal: 8.0, vertical: 20.0),
                                       child: Text(
                                         'Add project',
                                         style: TextStyle(
@@ -273,7 +274,22 @@ class _HomeState extends State<Home> {
                                       ),
                                     ),
                                   ),
-                                )
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: TextButton(
+                                    onPressed: () {
+                                      FirebaseAuth.instance.signOut();
+                                    },
+                                    child: Text(
+                                      'Log out',
+                                      style: TextStyle(
+                                        color: secondaryColour1,
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
