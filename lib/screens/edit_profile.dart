@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fic/screens/settings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -28,6 +29,13 @@ class _EditProfileState extends State<EditProfile> {
       );
       screenNotifier.value = !screenNotifier.value;
     });
+  }
+
+  goToSettings() {
+    setState(() {
+      screen = const SettingsScreen();
+    });
+    screenNotifier.value = !screenNotifier.value;
   }
 
   goToUserProfile(String uid) {
@@ -72,7 +80,9 @@ class _EditProfileState extends State<EditProfile> {
                   child: Row(
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          goToSettings();
+                        },
                         icon: Icon(Icons.menu, color: mainColour),
                       ),
                       SearchBar(

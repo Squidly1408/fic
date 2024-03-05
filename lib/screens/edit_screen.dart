@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fic/screens/home_search.dart';
+import 'package:fic/screens/settings.dart';
 import 'package:flutter/material.dart';
 
 import '../home.dart';
@@ -35,6 +36,13 @@ class _EditScreenState extends State<EditScreen> {
       );
     });
 
+    screenNotifier.value = !screenNotifier.value;
+  }
+
+  goToSettings() {
+    setState(() {
+      screen = const SettingsScreen();
+    });
     screenNotifier.value = !screenNotifier.value;
   }
 
@@ -76,7 +84,9 @@ class _EditScreenState extends State<EditScreen> {
                   child: Row(
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          goToSettings();
+                        },
                         icon: Icon(Icons.menu, color: mainColour),
                       ),
                       SearchBar(

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fic/screens/edit_screen.dart';
+import 'package:fic/screens/settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +31,13 @@ class _OtherProfileState extends State<OtherProfile> {
     });
   }
 
+  goToSettings() {
+    setState(() {
+      screen = const SettingsScreen();
+    });
+    screenNotifier.value = !screenNotifier.value;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -42,7 +49,9 @@ class _OtherProfileState extends State<OtherProfile> {
             child: Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    goToSettings();
+                  },
                   icon: Icon(Icons.menu, color: mainColour),
                 ),
                 SearchBar(
@@ -103,24 +112,27 @@ class _OtherProfileState extends State<OtherProfile> {
                                 ),
                               ),
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '${data['Username']}',
-                                  style: TextStyle(
-                                    color: secondaryColour2,
-                                    fontSize: 16,
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '${data['Username']}',
+                                    style: TextStyle(
+                                      color: secondaryColour2,
+                                      fontSize: 16,
+                                    ),
                                   ),
-                                ),
-                                Text(
-                                  '${data['Email']}',
-                                  style: TextStyle(
-                                    color: secondaryColour2,
-                                    fontSize: 10,
+                                  Text(
+                                    '${data['Email']}',
+                                    style: TextStyle(
+                                      color: secondaryColour2,
+                                      fontSize: 10,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ],
                         ),

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fic/screens/other_profile.dart';
+import 'package:fic/screens/settings.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -42,6 +43,13 @@ class _ResultState extends State<Result> {
     screenNotifier.value = !screenNotifier.value;
   }
 
+  goToSettings() {
+    setState(() {
+      screen = const SettingsScreen();
+    });
+    screenNotifier.value = !screenNotifier.value;
+  }
+
   like(index) {}
   dislike(index) {}
 
@@ -56,7 +64,9 @@ class _ResultState extends State<Result> {
             child: Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    goToSettings();
+                  },
                   icon: Icon(Icons.menu, color: mainColour),
                 ),
                 SearchBar(

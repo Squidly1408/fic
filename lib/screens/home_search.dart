@@ -1,6 +1,7 @@
 import 'package:fic/home.dart';
 import 'package:fic/main.dart';
 import 'package:fic/screens/result.dart';
+import 'package:fic/screens/settings.dart';
 import 'package:flutter/material.dart';
 
 class HomeSearch extends StatefulWidget {
@@ -28,7 +29,12 @@ class _HomeSearchState extends State<HomeSearch> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            setState(() {
+              screen = const SettingsScreen();
+            });
+            screenNotifier.value = !screenNotifier.value;
+          },
           icon: Icon(Icons.menu, color: mainColour),
         ),
         Center(
