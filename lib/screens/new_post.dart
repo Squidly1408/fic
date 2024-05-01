@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fic/screens/settings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../home.dart';
@@ -280,7 +279,7 @@ class _NewPostState extends State<NewPost> {
                                   snapshot.data!.get('Username').toString(),
                             });
                             setState(() {
-                              screen = HomeSearch();
+                              screen = const HomeSearch();
                             });
                             screenNotifier.value = !screenNotifier.value;
                           },

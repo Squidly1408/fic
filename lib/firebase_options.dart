@@ -61,4 +61,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'fic-chc.appspot.com',
     measurementId: 'G-F6P1288KTS',
   );
+
 }

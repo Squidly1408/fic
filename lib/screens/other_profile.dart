@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fic/screens/settings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../home.dart';
@@ -84,7 +83,7 @@ class _OtherProfileState extends State<OtherProfile> {
             Map<String, dynamic> data =
                 snapshot.data!.data() as Map<String, dynamic>;
             if (!snapshot.hasData) {
-              Text('Error');
+              const Text('Error');
             }
             if (snapshot.hasData) {
               return Expanded(

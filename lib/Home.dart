@@ -19,7 +19,7 @@ class Home extends StatefulWidget {
 ValueNotifier<bool> screenNotifier = ValueNotifier(false);
 ValueNotifier<bool> settingNotifer = ValueNotifier(false);
 
-Widget screen = HomeSearch();
+Widget screen = const HomeSearch();
 
 class _HomeState extends State<Home> {
   CollectionReference users = FirebaseFirestore.instance.collection('Users');

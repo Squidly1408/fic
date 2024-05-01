@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fic/screens/settings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../home.dart';
@@ -55,11 +54,11 @@ class _EditProfileState extends State<EditProfile> {
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.hasError) {
-          return Text("Something went wrong");
+          return const Text("Something went wrong");
         }
 
         if (snapshot.hasData && !snapshot.data!.exists) {
-          return Text("Document does not exist");
+          return const Text("Document does not exist");
         }
 
         if (snapshot.connectionState == ConnectionState.done) {
@@ -209,7 +208,7 @@ class _EditProfileState extends State<EditProfile> {
                                 .update({'Username': username.text});
 
                             setState(() {
-                              screen = HomeSearch();
+                              screen = const HomeSearch();
                             });
                             screenNotifier.value = !screenNotifier.value;
                           },
@@ -234,7 +233,7 @@ class _EditProfileState extends State<EditProfile> {
           );
         }
 
-        return Text("loading");
+        return const Text("loading");
       },
     );
   }

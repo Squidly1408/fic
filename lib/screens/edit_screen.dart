@@ -56,11 +56,11 @@ class _EditScreenState extends State<EditScreen> {
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.hasError) {
-          return Text("Something went wrong");
+          return const Text("Something went wrong");
         }
 
         if (snapshot.hasData && !snapshot.data!.exists) {
-          return Text("Document does not exist");
+          return const Text("Document does not exist");
         }
 
         if (snapshot.connectionState == ConnectionState.done) {
@@ -296,7 +296,7 @@ class _EditScreenState extends State<EditScreen> {
                               },
                             );
                             setState(() {
-                              screen = HomeSearch();
+                              screen = const HomeSearch();
                             });
                             screenNotifier.value = !screenNotifier.value;
                           },
@@ -321,7 +321,7 @@ class _EditScreenState extends State<EditScreen> {
           );
         }
 
-        return Text("loading");
+        return const Text("loading");
       },
     );
   }
