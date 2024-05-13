@@ -3,7 +3,6 @@ import 'package:fic/screens/other_profile.dart';
 import 'package:fic/screens/settings.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../home.dart';

@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fic/screens/home_search.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import '../home.dart';
 import '../main.dart';
@@ -18,6 +17,8 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  var passwordController = TextEditingController();
+
   CollectionReference users = FirebaseFirestore.instance.collection('Users');
   final likesRef = FirebaseFirestore.instance
       .collection('Likes')
@@ -278,6 +279,123 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           padding: const EdgeInsets.all(4.0),
                           child: TextButton(
                             onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.8,
+                                      child: Card(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            // logo
+                                            SizedBox(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.3,
+                                              child: Image.asset(
+                                                  'assets/images/fic_logo.png',
+                                                  fit: BoxFit.scaleDown),
+                                            ),
+
+                                            // password login details
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(10.0),
+                                              child: TextFormField(
+                                                style: TextStyle(
+                                                  color: mainColour,
+                                                ),
+                                                controller: passwordController,
+                                                obscureText: true,
+                                                cursorColor: mainColour,
+                                                decoration: InputDecoration(
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: mainColour,
+                                                      width: 3,
+                                                    ),
+                                                  ),
+                                                  enabledBorder:
+                                                      OutlineInputBorder(
+                                                    borderSide: BorderSide(
+                                                      color: mainColour,
+                                                    ),
+                                                  ),
+                                                  hintText: 'Password...',
+                                                  hintStyle: TextStyle(
+                                                    color: mainColour,
+                                                  ),
+                                                  border: OutlineInputBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            // login button
+                                            MaterialButton(
+                                              onPressed: () {
+                                                FirebaseAuth
+                                                    .instance.currentUser
+                                                    ?.updatePassword(
+                                                        passwordController
+                                                            .text);
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  const SnackBar(
+                                                    content: Text(
+                                                      'Password changed',
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              color: mainColour,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 75),
+                                                child: Text(
+                                                  'Change Password',
+                                                  style: TextStyle(
+                                                      color: secondaryColour2),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            },
+                            child: Text(
+                              'Change Password',
+                              style: TextStyle(
+                                color: secondaryColour1,
+                                fontSize: 13,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: TextButton(
+                            onPressed: () {
                               FirebaseAuth.instance.signOut();
                             },
                             child: Text(
@@ -297,7 +415,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
             );
           }
 
-          return const Text("loading");
+          return Center(
+            child: CircularProgressIndicator(
+              color: mainColour,
+            ),
+          );
         },
       ),
     );

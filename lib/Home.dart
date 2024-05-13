@@ -309,12 +309,9 @@ class _HomeState extends State<Home> {
                 );
               }
 
-              return const Center(
-                child: Text(
-                  'Loading...',
-                  style: TextStyle(
-                    color: Color(0xff000000),
-                  ),
+              return Center(
+                child: CircularProgressIndicator(
+                  color: mainColour,
                 ),
               );
             },

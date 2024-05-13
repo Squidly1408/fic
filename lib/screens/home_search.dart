@@ -3,7 +3,6 @@ import 'package:fic/main.dart';
 import 'package:fic/screens/result.dart';
 import 'package:fic/screens/settings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class HomeSearch extends StatefulWidget {
   const HomeSearch({super.key});

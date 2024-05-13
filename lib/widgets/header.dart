@@ -7,7 +7,6 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController searchController = TextEditingController();
-// TODO: Fix app bar
     return AppBar(
       shadowColor: Colors.red,
       titleSpacing: 0,
