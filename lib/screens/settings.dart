@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fic/screens/home_search.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../home.dart';
 import '../main.dart';
@@ -51,25 +52,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     decoration: BoxDecoration(
                       color: secondaryColour2,
                     ),
-                    // TODO: Make this variebale change with size of screen
                     width: MediaQuery.of(context).size.width * 0.25,
                     child: ListView(
                       children: [
                         Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      screen = const HomeSearch();
-                                    });
-                                    screenNotifier.value =
-                                        !screenNotifier.value;
-                                  },
-                                  icon: Icon(
-                                    Icons.arrow_back,
-                                    color: secondaryColour1,
-                                  ))
+                              Visibility(
+                                visible:
+                                    MediaQuery.of(context).size.width < 1000,
+                                child: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        screen = const HomeSearch();
+                                      });
+                                      screenNotifier.value =
+                                          !screenNotifier.value;
+                                    },
+                                    icon: Icon(
+                                      Icons.arrow_back,
+                                      color: secondaryColour1,
+                                    )),
+                              )
                             ]),
                         SizedBox(
                           width: 20,

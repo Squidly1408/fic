@@ -3,6 +3,7 @@ import 'package:fic/screens/other_profile.dart';
 import 'package:fic/screens/settings.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../home.dart';
@@ -62,11 +63,14 @@ class _ResultState extends State<Result> {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                IconButton(
-                  onPressed: () {
-                    goToSettings();
-                  },
-                  icon: Icon(Icons.menu, color: mainColour),
+                Visibility(
+                  visible: MediaQuery.of(context).size.width < 1000,
+                  child: IconButton(
+                    onPressed: () {
+                      goToSettings();
+                    },
+                    icon: Icon(Icons.menu, color: mainColour),
+                  ),
                 ),
                 SearchBar(
                   constraints: BoxConstraints(
@@ -151,9 +155,11 @@ class _ResultState extends State<Result> {
                                             child: CircleAvatar(
                                               backgroundColor: Colors.white,
                                               maxRadius: 20,
-                                              backgroundImage: NetworkImage(
-                                                  data['ProfilePic']
-                                                      .toString()),
+                                              child: Text(
+                                                '${data['Initials']}',
+                                                style: const TextStyle(
+                                                    fontSize: 20),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -236,7 +242,11 @@ class _ResultState extends State<Result> {
               if (snapshot.hasError) {
                 return Text(snapshot.error.toString());
               } else {
-                return const CircularProgressIndicator();
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: mainColour,
+                  ),
+                );
               }
             },
           ),

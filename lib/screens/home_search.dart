@@ -3,6 +3,7 @@ import 'package:fic/main.dart';
 import 'package:fic/screens/result.dart';
 import 'package:fic/screens/settings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class HomeSearch extends StatefulWidget {
   const HomeSearch({super.key});
@@ -28,14 +29,17 @@ class _HomeSearchState extends State<HomeSearch> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        IconButton(
-          onPressed: () {
-            setState(() {
-              screen = const SettingsScreen();
-            });
-            screenNotifier.value = !screenNotifier.value;
-          },
-          icon: Icon(Icons.menu, color: mainColour),
+        Visibility(
+          visible: MediaQuery.of(context).size.width < 1000,
+          child: IconButton(
+            onPressed: () {
+              setState(() {
+                screen = const SettingsScreen();
+              });
+              screenNotifier.value = !screenNotifier.value;
+            },
+            icon: Icon(Icons.menu, color: mainColour),
+          ),
         ),
         Center(
           child: SingleChildScrollView(
@@ -54,7 +58,7 @@ class _HomeSearchState extends State<HomeSearch> {
                   surfaceTintColor: MaterialStatePropertyAll(secondaryColour1),
                   hintText: 'Search...',
                   onSubmitted: (value) {
-                    search(value);
+                    search(value.toLowerCase());
                   },
                   side: MaterialStatePropertyAll(
                     BorderSide(color: secondaryColour2),

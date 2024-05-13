@@ -177,7 +177,7 @@ class _EditScreenState extends State<EditScreen> {
                               keyboardType: TextInputType.multiline,
                               cursorColor: secondaryColour2,
                               decoration: InputDecoration(
-                                labelText: 'Query 1',
+                                labelText: 'Search Term 1',
                                 labelStyle: TextStyle(color: secondaryColour2),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -190,7 +190,7 @@ class _EditScreenState extends State<EditScreen> {
                                     color: secondaryColour2,
                                   ),
                                 ),
-                                hintText: 'Search query 1...',
+                                hintText: 'Search Term 1...',
                                 hintStyle: TextStyle(
                                   color: secondaryColour2,
                                 ),
@@ -215,7 +215,7 @@ class _EditScreenState extends State<EditScreen> {
                               keyboardType: TextInputType.multiline,
                               cursorColor: secondaryColour2,
                               decoration: InputDecoration(
-                                labelText: 'Query 2',
+                                labelText: 'Search Term 2',
                                 labelStyle: TextStyle(color: secondaryColour2),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -228,7 +228,7 @@ class _EditScreenState extends State<EditScreen> {
                                     color: secondaryColour2,
                                   ),
                                 ),
-                                hintText: 'Search query 2...',
+                                hintText: 'Search Term 2...',
                                 hintStyle: TextStyle(
                                   color: secondaryColour2,
                                 ),
@@ -253,7 +253,7 @@ class _EditScreenState extends State<EditScreen> {
                               keyboardType: TextInputType.multiline,
                               cursorColor: secondaryColour2,
                               decoration: InputDecoration(
-                                labelText: 'Query 3',
+                                labelText: 'Search Term 3',
                                 labelStyle: TextStyle(color: secondaryColour2),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -266,7 +266,7 @@ class _EditScreenState extends State<EditScreen> {
                                     color: secondaryColour2,
                                   ),
                                 ),
-                                hintText: 'Search query 3...',
+                                hintText: 'Search Term 3...',
                                 hintStyle: TextStyle(
                                   color: secondaryColour2,
                                 ),
@@ -321,7 +321,11 @@ class _EditScreenState extends State<EditScreen> {
           );
         }
 
-        return const Text("loading");
+        return Center(
+          child: CircularProgressIndicator(
+            color: mainColour,
+          ),
+        );
       },
     );
   }

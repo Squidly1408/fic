@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fic/screens/settings.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../home.dart';
 import '../main.dart';
@@ -64,11 +65,14 @@ class _NewPostState extends State<NewPost> {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                IconButton(
-                  onPressed: () {
-                    goToSettings();
-                  },
-                  icon: Icon(Icons.menu, color: mainColour),
+                Visibility(
+                  visible: MediaQuery.of(context).size.width < 1000,
+                  child: IconButton(
+                    onPressed: () {
+                      goToSettings();
+                    },
+                    icon: Icon(Icons.menu, color: mainColour),
+                  ),
                 ),
                 SearchBar(
                   constraints: BoxConstraints(
@@ -162,7 +166,7 @@ class _NewPostState extends State<NewPost> {
                               keyboardType: TextInputType.multiline,
                               cursorColor: secondaryColour2,
                               decoration: InputDecoration(
-                                labelText: 'Query 1',
+                                labelText: 'Term 1',
                                 labelStyle: TextStyle(color: secondaryColour2),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -175,7 +179,7 @@ class _NewPostState extends State<NewPost> {
                                     color: secondaryColour2,
                                   ),
                                 ),
-                                hintText: 'Search query 1...',
+                                hintText: 'Search Term 1...',
                                 hintStyle: TextStyle(
                                   color: secondaryColour2,
                                 ),
@@ -200,7 +204,7 @@ class _NewPostState extends State<NewPost> {
                               keyboardType: TextInputType.multiline,
                               cursorColor: secondaryColour2,
                               decoration: InputDecoration(
-                                labelText: 'Query 2',
+                                labelText: 'Term 2',
                                 labelStyle: TextStyle(color: secondaryColour2),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -213,7 +217,7 @@ class _NewPostState extends State<NewPost> {
                                     color: secondaryColour2,
                                   ),
                                 ),
-                                hintText: 'Search query 2...',
+                                hintText: 'Search Term 2...',
                                 hintStyle: TextStyle(
                                   color: secondaryColour2,
                                 ),
@@ -238,7 +242,7 @@ class _NewPostState extends State<NewPost> {
                               keyboardType: TextInputType.multiline,
                               cursorColor: secondaryColour2,
                               decoration: InputDecoration(
-                                labelText: 'Query 3',
+                                labelText: 'Term 3',
                                 labelStyle: TextStyle(color: secondaryColour2),
                                 focusedBorder: OutlineInputBorder(
                                   borderSide: BorderSide(
@@ -251,7 +255,7 @@ class _NewPostState extends State<NewPost> {
                                     color: secondaryColour2,
                                   ),
                                 ),
-                                hintText: 'Search query 3...',
+                                hintText: 'Search Term 3...',
                                 hintStyle: TextStyle(
                                   color: secondaryColour2,
                                 ),
@@ -267,9 +271,9 @@ class _NewPostState extends State<NewPost> {
                             FirebaseFirestore.instance.collection('Posts').add({
                               'description': description.text,
                               'Queries': [
-                                query1.text,
-                                query2.text,
-                                query3.text
+                                query1.text.toLowerCase(),
+                                query2.text.toLowerCase(),
+                                query3.text.toLowerCase(),
                               ],
                               'Email': FirebaseAuth.instance.currentUser!.email
                                   .toString(),

@@ -23,9 +23,6 @@ Widget screen = const HomeSearch();
 
 class _HomeState extends State<Home> {
   CollectionReference users = FirebaseFirestore.instance.collection('Users');
-  final likesRef = FirebaseFirestore.instance
-      .collection('Likes')
-      .doc(FirebaseAuth.instance.currentUser?.uid);
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +56,6 @@ class _HomeState extends State<Home> {
                             decoration: BoxDecoration(
                               color: secondaryColour2,
                             ),
-                            // TODO: Make this variebale change with size of screen
                             width: MediaQuery.of(context).size.width * 0.25,
                             child: ListView(
                               children: [
@@ -77,7 +73,7 @@ class _HomeState extends State<Home> {
                                     Flex(
                                       direction:
                                           MediaQuery.of(context).size.width <
-                                                  1000
+                                                  1250
                                               ? Axis.vertical
                                               : Axis.horizontal,
                                       children: [
@@ -89,33 +85,38 @@ class _HomeState extends State<Home> {
                                             child: CircleAvatar(
                                               backgroundColor: Colors.white,
                                               maxRadius: 30,
-                                              backgroundImage: NetworkImage(
-                                                  data['ProfilePic'].toString(),
-                                                  scale: 0.05),
+                                              child: Text(
+                                                '${data['Initials']}',
+                                                style: const TextStyle(
+                                                    fontSize: 25),
+                                              ),
                                             ),
                                           ),
                                         ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              '${data['Username']}',
-                                              style: TextStyle(
-                                                color: secondaryColour1,
-                                                fontSize: 16,
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                '${data['Username']}',
+                                                style: TextStyle(
+                                                  color: secondaryColour1,
+                                                  fontSize: 16,
+                                                ),
                                               ),
-                                            ),
-                                            Text(
-                                              FirebaseAuth
-                                                  .instance.currentUser!.email
-                                                  .toString(),
-                                              style: TextStyle(
-                                                color: secondaryColour1,
-                                                fontSize: 10,
+                                              Text(
+                                                FirebaseAuth
+                                                    .instance.currentUser!.email
+                                                    .toString(),
+                                                style: TextStyle(
+                                                  color: secondaryColour1,
+                                                  fontSize: 10,
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -308,7 +309,14 @@ class _HomeState extends State<Home> {
                 );
               }
 
-              return const Text("loading");
+              return const Center(
+                child: Text(
+                  'Loading...',
+                  style: TextStyle(
+                    color: Color(0xff000000),
+                  ),
+                ),
+              );
             },
           )
         : Expanded(

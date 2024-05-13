@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fic/screens/settings.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../home.dart';
 import '../main.dart';
@@ -47,11 +48,14 @@ class _OtherProfileState extends State<OtherProfile> {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                IconButton(
-                  onPressed: () {
-                    goToSettings();
-                  },
-                  icon: Icon(Icons.menu, color: mainColour),
+                Visibility(
+                  visible: MediaQuery.of(context).size.width < 1000,
+                  child: IconButton(
+                    onPressed: () {
+                      goToSettings();
+                    },
+                    icon: Icon(Icons.menu, color: mainColour),
+                  ),
                 ),
                 SearchBar(
                   constraints: BoxConstraints(
@@ -106,8 +110,10 @@ class _OtherProfileState extends State<OtherProfile> {
                                 child: CircleAvatar(
                                   backgroundColor: Colors.white,
                                   maxRadius: 30,
-                                  backgroundImage: NetworkImage(
-                                      data['ProfilePic'].toString()),
+                                  child: Text(
+                                    '${data['Initials']}',
+                                    style: const TextStyle(fontSize: 25),
+                                  ),
                                 ),
                               ),
                             ),
@@ -204,7 +210,11 @@ class _OtherProfileState extends State<OtherProfile> {
             if (snapshot.hasError) {
               return Text(snapshot.error.toString());
             } else {
-              return const CircularProgressIndicator();
+              return Center(
+                child: CircularProgressIndicator(
+                  color: mainColour,
+                ),
+              );
             }
           },
         ),

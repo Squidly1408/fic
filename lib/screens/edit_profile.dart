@@ -147,7 +147,7 @@ class _EditProfileState extends State<EditProfile> {
                                     color: secondaryColour2,
                                   ),
                                 ),
-                                hintText: 'Search query 1...',
+                                hintText: 'Username',
                                 hintStyle: TextStyle(
                                   color: secondaryColour2,
                                 ),
@@ -233,7 +233,11 @@ class _EditProfileState extends State<EditProfile> {
           );
         }
 
-        return const Text("loading");
+        return Center(
+          child: CircularProgressIndicator(
+            color: mainColour,
+          ),
+        );
       },
     );
   }
