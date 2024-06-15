@@ -1,16 +1,22 @@
-# fic
 
-A new Flutter project.
+![Logo](https://raw.githubusercontent.com/Squidly1408/Squidly1408/main/images/Squidly1408.png)
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+# Project Database
 
-A few resources to get you started if this is your first Flutter project:
+This is the updated version Project Database ([GitHub repo](https://github.com/Squidly1408/project_database)). Its aim is designed to allow students at Cooks Hill Campus The Big Picture Educations school in Newcastle to fiind other students projects. This would allow for increased collaboration, ideas, and monitering of students projects. 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+## 🛠 Tech Stack
+Flutter, Dart, Firebase Authentication, Firebase Database, Firebase Storage, Canva, UI & UX design.
+
+
+\
+\
+\
+\
+\
+If you have any feedback, please reach out to us at Squidly1408@Gmail.com
+
